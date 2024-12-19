@@ -1,1 +1,15 @@
 node_modules/
+build/
+dist/
+coverage/
+.vite/
+.firebase
+.firebaserc
+firebase.json
+firebase-debug.log
+firebase-debug.log.*
+firebase.json
+firestore-debug.log
+firestore-debug.log.*
+storage-debug.log
+storage-debug.log.*
