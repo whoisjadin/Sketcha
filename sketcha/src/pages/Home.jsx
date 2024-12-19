@@ -5,7 +5,7 @@ import NewSketch from "../components/NewSketch";
 function Home({ canvasSize, setCanvasSize, setIsSketchLoaded, newSketch, setNewSketch, fromSettings }) {
 
     return (
-        <div className="flex flex-col justify-center items-center h-screen bg-base-200">
+        <div className="flex flex-col justify-center items-center h-screen bg-gradient-to-b from-base-200 from-30% to-base-300">
             <LogoHeader />
             {!newSketch ? (
                 <>

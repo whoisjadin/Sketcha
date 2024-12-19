@@ -7,7 +7,7 @@ function Landing() {
     const navigate = useNavigate();
 
     return (
-        <div className="flex flex-row justify-center items-center h-screen space-x-24 bg-base-200">
+        <div className="flex flex-row justify-center items-center h-screen space-x-24 bg-gradient-to-b from-base-200 from-30% to-base-300">
             <div className="flex flex-col justify-center items-center">
                 <LogoHeader />
                 <p className="font-thin tracking-widest text-neutral mb-8 w-[30rem]">
