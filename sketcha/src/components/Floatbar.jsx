@@ -42,7 +42,7 @@ function FloatbarLeft({ isOpen, onToggle, name, children, ...props }) {
                         <button
                             onClick={onToggle}
                             title={`Collapse ${name}`}
-                            className="transition-all duration-200 ease-in-out shadow-sm z-[100] border-primary-content rounded-r-md border-y border-r h-20 w-4 hover:w-6 hover:h-[4.5rem] bg-base-100 hover:bg-base-200 flex justify-center items-center"
+                            className="transition-all duration-200 ease-in-out shadow-sm z-[100] border-primary-content rounded-r-md border-y border-r h-20 sm:w-4 w-6 sm:hover:w-6 hover:w-8 hover:h-[4.5rem] bg-base-100 hover:bg-base-200 flex justify-center items-center"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -66,7 +66,7 @@ function FloatbarLeft({ isOpen, onToggle, name, children, ...props }) {
                 <button
                     onClick={onToggle}
                     title={`Expand ${name}`}
-                    className="transition-all duration-200 ease-in-out shadow-sm z-[100] rounded-r-md border-primary-content border h-20 w-6 hover:h-[5.5rem] hover:w-8 bg-base-100 hover:bg-base-200 fixed top-[50%] translate-y-[-50%] left-0 flex justify-center items-center"
+                    className="transition-all duration-200 ease-in-out shadow-sm z-[100] rounded-r-md border-primary-content border h-20 sm:w-6 w-8 sm:hover:w-8 hover:w-10 hover:h-[5.5rem] bg-base-100 hover:bg-base-200 fixed top-[50%] translate-y-[-50%] left-0 flex justify-center items-center"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="m-auto">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -87,7 +87,7 @@ function FloatbarRight({ isOpen, onToggle, name, children, ...props }) {
                         <button
                             onClick={onToggle}
                             title={`Collapse ${name}`}
-                            className="transition-all duration-200 ease-in-out border-primary-content shadow-sm z-[100] rounded-l-md border-y border-l h-20 w-4 hover:w-6 hover:h-[4.5rem] bg-base-100 hover:bg-base-200 flex justify-center items-center"
+                            className="transition-all duration-200 ease-in-out border-primary-content shadow-sm z-[100] rounded-l-md border-y border-l h-20 sm:w-4 w-6 sm:hover:w-6 hover:w-8  hover:h-[4.5rem] bg-base-100 hover:bg-base-200 flex justify-center items-center"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -116,7 +116,7 @@ function FloatbarRight({ isOpen, onToggle, name, children, ...props }) {
                 <button
                     onClick={onToggle}
                     title={`Expand ${name}`}
-                    className="transition-all duration-200 ease-in-out shadow-sm z-[100] rounded-l-md border h-20 w-6 hover:h-[5.5rem] border-primary-content hover:w-8 bg-base-100 hover:bg-base-200 fixed right-0 top-[50%] translate-y-[-50%] flex justify-center items-center"
+                    className="transition-all duration-200 ease-in-out shadow-sm z-[100] rounded-l-md border h-20 sm:w-6 w-8 sm:hover:w-8 hover:w-10 hover:h-[5.5rem] border-primary-content bg-base-100 hover:bg-base-200 fixed right-0 top-[50%] translate-y-[-50%] flex justify-center items-center"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -152,7 +152,7 @@ function FloatbarTop({ isOpen, onToggle, name, children, ...props }) {
                     <button
                         onClick={onToggle}
                         title={`Collapse ${name}`}
-                        className="shadow-sm rounded-b-md border-b border-x w-20 h-4 hover:h-6 hover:w-[4.5rem] border-primary-content flex justify-center items-center mx-auto bg-base-100 hover:bg-base-200 transition-all duration-200 ease-in-out"
+                        className="shadow-sm rounded-b-md border-b border-x w-20 sm:h-4 h-6 sm:hover:h-6 hover:h-8 hover:w-[4.5rem] border-primary-content flex justify-center items-center mx-auto bg-base-100 hover:bg-base-200 transition-all duration-200 ease-in-out"
                     >
                         <svg
                             className="m-auto"
@@ -175,7 +175,7 @@ function FloatbarTop({ isOpen, onToggle, name, children, ...props }) {
                 <button
                     onClick={onToggle}
                     title={`Expand ${name}`}
-                    className="shadow-sm z-[100] rounded-b-md border-b border-x w-20 h-6 hover:h-8 hover:w-24 flex border-primary-content justify-center items-center bg-base-100 hover:bg-base-200 fixed top-0 left-[50%] translate-x-[-50%] transition-all duration-200 ease-in-out"
+                    className="shadow-sm z-[100] rounded-b-md border-b border-x w-20 sm:h-6 h-8 sm:hover:h-8 hover:h-10 hover:w-24 flex border-primary-content justify-center items-center bg-base-100 hover:bg-base-200 fixed top-0 left-[50%] translate-x-[-50%] transition-all duration-200 ease-in-out"
                 >
                     <svg
                         className="m-auto"
@@ -206,7 +206,7 @@ function FloatbarBottom({ isOpen, onToggle, name, children, ...props }) {
                     <button
                         onClick={onToggle}
                         title={`Collapse ${name}`}
-                        className="shadow-sm rounded-t-md border-t border-x w-20 h-4 hover:h-6 hover:w-[4.5rem] flex border-primary-content justify-center items-center mx-auto bg-base-100 hover:bg-base-200 transition-all duration-200 ease-in-out"
+                        className="shadow-sm rounded-t-md border-t border-x w-20 sm:h-4 h-6 sm:hover:h-6 hover:h-8 hover:w-[4.5rem] flex border-primary-content justify-center items-center mx-auto bg-base-100 hover:bg-base-200 transition-all duration-200 ease-in-out"
                     >
                         <svg
                             className="m-auto"
@@ -233,7 +233,7 @@ function FloatbarBottom({ isOpen, onToggle, name, children, ...props }) {
                 <button
                     onClick={onToggle}
                     title={`Expand ${name}`}
-                    className="shadow-sm z-[100] rounded-t-md border-t border-x w-20 h-6 hover:h-8 hover:w-24 flex justify-center border-primary-content items-center bg-base-100 hover:bg-base-200 fixed bottom-0 left-[50%] translate-x-[-50%] transition-all duration-200 ease-in-out"
+                    className="shadow-sm z-[100] rounded-t-md border-t border-x w-20 sm:h-6 h-8 sm:hover:h-8 hover:h-10 hover:w-24 flex justify-center border-primary-content items-center bg-base-100 hover:bg-base-200 fixed bottom-0 left-[50%] translate-x-[-50%] transition-all duration-200 ease-in-out"
                 >
                     <svg
                         className="m-auto"

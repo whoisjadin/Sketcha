@@ -4,4 +4,10 @@
 
 html {
   scrollbar-gutter: auto !important;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+body {
+  position: fixed;
 }

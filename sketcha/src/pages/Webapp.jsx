@@ -10,7 +10,7 @@ function App() {
   const { canvasSize, setCanvasSize } = useCanvasState();
   
   return (
-    <div className="h-screen w-screen flex justify-center items-center bg-gradient-to-b from-base-200 from-30% to-base-300">
+    <div className="h-svh w-screen flex justify-center items-center bg-gradient-to-b from-base-200 from-30% to-base-300">
       {!isSketchLoaded ?
         <Home
           canvasSize={canvasSize}

@@ -35,9 +35,9 @@ function SwatchesPicker({ color, onChange, presetColors }) {
       <div className="w-[12.5rem] mt-2 menu rounded-md border border-primary-content ">
         <details>
         <summary className="text-xs font-bold tracking-wide">Custom Swatches</summary>
-        <div className="">
+        <div className="m">
           <button
-            className="btn btn-xs mt-2 text-xs  hover:scale-110"
+            className="btn btn-xs border border-primary-content mt-2 text-xs"
             onClick={handleClearCustomColors}
             disabled={!customColors.length} // Disable if no custom colors
           >
@@ -46,19 +46,19 @@ function SwatchesPicker({ color, onChange, presetColors }) {
 
           {/* Add a button for clearing the selected color */}
           <button
-            className="btn btn-xs mt-2 text-xs  hover:scale-110"
+            className="btn btn-xs border border-primary-content mt-2 text-xs"
             onClick={handleClearSelectedColor}
             disabled={!selectedColor} // Disable if no color is selected
           >
             Clear Selected Color
           </button>
 
-          <div className="w-[12.5rem] flex flex-wrap">
+          <div className="w-[12.5rem] flex flex-wrap pt-2">
             {presetColors.map((presetColor) => (
               <button
                 title={presetColor}
                 key={presetColor}
-                className="btn btn-square btn-sm  hover:scale-110  m-[2px] mt-2 p-[3px] rounded-md"
+                className="btn btn-sm btn-square border border-primary-content hover:scale-110  m-[2px] mt-2 p-[3px]"
                 onClick={() => {
                   onChange(presetColor);
                   setSelectedColor(presetColor); // Set selected color when preset is clicked
@@ -75,13 +75,13 @@ function SwatchesPicker({ color, onChange, presetColors }) {
                   onChange(customColor);
                   setSelectedColor(customColor); // Set selected color when custom color is clicked
                 }}
-                className="btn btn-square btn-sm  hover:scale-110  m-[2px] mt-2 p-[3px] rounded-md"
+                className="btn btn-sm btn-square border border-primary-content hover:scale-110  m-[2px] mt-2 p-[3px]"
               >
                 <div style={{ background: customColor }} className="w-full h-full border border-primary-content rounded-full"></div>
               </button>
             ))}
             <button
-              className="btn btn-square btn-sm  hover:scale-110  m-1 mt-2 p-[4px] rounded-md"
+              className="btn btn-sm btn-square border border-primary-content hover:scale-110  m-1 mt-2 p-[4px] rounded-md"
               onClick={handleAddSwatch}
             >
               +

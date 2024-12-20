@@ -5,11 +5,11 @@ import NewSketch from "../components/NewSketch";
 function Home({ canvasSize, setCanvasSize, setIsSketchLoaded, newSketch, setNewSketch, fromSettings }) {
 
     return (
-        <div className="flex flex-col justify-center items-center h-screen bg-gradient-to-b from-base-200 from-30% to-base-300">
+        <div className="flex flex-col justify-center items-center h-svh w-80 sm:w-screen">
             <LogoHeader />
             {!newSketch ? (
                 <>
-                    <p className=" font-thin tracking-widest text-neutral">
+                    <p className=" font-thin tracking-widest text-neutral text-sm sm:text-base">
                         Whats on your mind? Bring your idea to life.
                     </p>
                     <div className="mt-8 w-64 flex flex-col space-y-4">

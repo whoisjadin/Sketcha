@@ -56,13 +56,15 @@ function Sidebar({ drawingColor, setDrawingColor, brushSize, setBrushSize, isSid
         <div className="space-y-2 p-1 w-fit flex flex-col">
                 <p className="text-xs font-bold tracking-wide">Color Picker</p>
                 <SwatchesPicker color={drawingColor} onChange={setDrawingColor} presetColors={presetColors} />
+                <div className="sm:block hidden">
                 <p className="text-xs font-light tracking-wide">Color Testing Pallet</p>
-                <canvas ref={canvasRef} className="w-full h-40 rounded-md border border-primary-content " width="200" height="100"></canvas>
-                <div className="flex justify-start">
+                <canvas ref={canvasRef} className="w-full h-40 rounded-md border border-primary-content" width="200" height="100"></canvas>
+                <div className="flex justify-start sm:block hidden">
                     <button className="text-left text-xs link-hover link" onClick={handleClearCanvas}>Clear Pallet Canvas</button>
                 </div>
                 <hr />
-                <div className="menu border border-primary-content">
+                </div>
+                <div className="menu rounded-md border border-primary-content">
                     <details>
                         <summary className="text-xs font-bold tracking-wide hover:cursor-pointer">Brush Size</summary>
                         <div className="flex items-center space-x-2 mt-2">

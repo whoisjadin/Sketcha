@@ -4,8 +4,8 @@ function NewSketch({ canvasSize, setCanvasSize, setNewSketch, setIsSketchLoaded,
     const handlePresetClick = (width, height) => () => setCanvasSize({ width, height });
 
     return (
-        <div className="bg-base-100 shadow-sm rounded-md border border-primary-content flex flex-col p-2">
-            <div className="flex flex-row p-1">
+        <div className="min-w-xs sm:w-auto bg-base-100 shadow-sm rounded-md border border-primary-content flex flex-col">
+            <div className="p-3 flex-row flex">
                 <h1 className="text-xs font-bold tracking-wide flex-1">New Sketch</h1>
                 {!fromSettings && (
                     <button
@@ -33,7 +33,7 @@ function NewSketch({ canvasSize, setCanvasSize, setNewSketch, setIsSketchLoaded,
                     </button>
                 )}
             </div>
-            <div className="flex flex-row space-x-4 p-1">
+            <div className="flex flex-row space-x-4 mx-3">
                 <div className="flex flex-col">
                     <label className="text-xs font-thin tracking-wide">Width:</label>
                     <input
@@ -70,21 +70,21 @@ function NewSketch({ canvasSize, setCanvasSize, setNewSketch, setIsSketchLoaded,
                         </button>
                     ))}
                 </div>
-                <div className="border border-primary-content bg-base-200 w-[20rem] h-[20rem] flex justify-center items-center flex-col">
+                <div className="border border-primary-content bg-base-200 w-40 sm:w-80 h-full flex justify-center items-center flex-col">
                     <p className="text-sm font-thin tracking-wider text-neutral-content">
                         {canvasSize.width} x {canvasSize.height} (pixels)
                     </p>
                     <div
-                        className="bg-base-100 border border-primary-content max-w-[60%] max-h-[60%]"
+                        className="bg-base-100 border border-primary-content"
                         style={{
-                            width: `${(canvasSize.width / (canvasSize.width + canvasSize.height)) * 20}rem`,
-                            height: `${(canvasSize.height / (canvasSize.width + canvasSize.height)) * 20}rem`,
+                            width: `${(canvasSize.width / (canvasSize.width + canvasSize.height)) * 12}rem`,
+                            height: `${(canvasSize.height / (canvasSize.width + canvasSize.height)) * 12}rem`,
                         }}
                     />
                 </div>
             </div>
             <button
-                className="btn btn-sm border rounded-md border-primary-content"
+                className="btn btn-sm m-3 border rounded-md border-primary-content"
                 onClick={() => setIsSketchLoaded(true)}
             >
                 Create Sketch

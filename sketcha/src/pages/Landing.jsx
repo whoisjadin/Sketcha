@@ -7,21 +7,21 @@ function Landing() {
     const navigate = useNavigate();
 
     return (
-        <div className="flex flex-row justify-center items-center h-screen space-x-24 bg-gradient-to-b from-base-200 from-30% to-base-300">
-            <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center h-svh w-screen bg-gradient-to-b from-base-200 from-30% to-base-300">
+            <div className="w-80 sm:w-[40rem] flex flex-col items-center justify-center">
                 <LogoHeader />
-                <p className="font-thin tracking-widest text-neutral mb-8 w-[30rem]">
-                    Sketcha is a free and open source sketching app. Quickly sketch your ideas and bring them to life.
+                <p className="font-thin tracking-widest text-neutral mb-8 text-center sm:text-start">
+                    Sketcha is a free and open-source drawing app, perfect for quick sketches and doodles. With support for both desktop and mobile, our tool allows you to quickly sketch your ideas and bring them to life.
                 </p>
                 <button className="btn bg-base-100 border rounded-md border-primary-content w-full mb-4" onClick={() => navigate("/sketch")}>
                     Open in Browser
                 </button>
-                <button className="btn btn-disabled rounded-md w-full" disabled>
+                <button className="btn btn-disabled rounded-md mb-8 w-full" disabled>
                     Download for Desktop
                 </button>
             </div>
-            <div className="mockup-window rounded-md shadow-lg bg-base-100 border border-primary-content">
-                <img src={preview} alt="preview" className="h-72" />
+            <div className="hidden sm:block w-80 rounded-sm sm:mockup-window sm:rounded-md shadow-lg bg-base-100 border border-primary-content">
+                <img src={preview} alt="preview" className="w-80" />
             </div>
         </div>
     );
