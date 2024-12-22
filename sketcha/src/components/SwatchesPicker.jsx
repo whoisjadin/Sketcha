@@ -30,35 +30,33 @@ function SwatchesPicker({ color, onChange, presetColors }) {
   };
 
   return (
-    <div className="w-full">
+    <div className="">
       <HexColorPicker color={color} onChange={onChange} className="border border-primary-content rounded-lg"/>
-      <div className="w-[12.5rem] mt-2 menu rounded-md border border-primary-content ">
+      <div className="menu rounded-md border border-primary-content p-0 mt-2">
         <details>
-        <summary className="text-xs font-bold tracking-wide">Custom Swatches</summary>
-        <div className="m">
+        <summary className="hover:bg-base-200 text-xs font-bold tracking-wide hover:cursor-pointer p-2">Color Swatches</summary>
+        <div className="flex flex-col p-2 space-y-2">
           <button
-            className="btn btn-xs border border-primary-content mt-2 text-xs"
+            className="btn btn-xs border border-primary-content text-xs rounded-md"
             onClick={handleClearCustomColors}
             disabled={!customColors.length} // Disable if no custom colors
           >
-            Clear Custom Colors
+            Clear All Custom Colors
           </button>
-
-          {/* Add a button for clearing the selected color */}
           <button
-            className="btn btn-xs border border-primary-content mt-2 text-xs"
+            className="btn btn-xs border border-primary-content text-xs rounded-md"
             onClick={handleClearSelectedColor}
             disabled={!selectedColor} // Disable if no color is selected
           >
             Clear Selected Color
           </button>
 
-          <div className="w-[12.5rem] flex flex-wrap pt-2">
+          <div className="w-[11.4rem] flex flex-wrap">
             {presetColors.map((presetColor) => (
               <button
                 title={presetColor}
                 key={presetColor}
-                className="btn btn-sm btn-square border border-primary-content hover:scale-110  m-[2px] mt-2 p-[3px]"
+                className="btn btn-sm btn-square border border-primary-content hover:scale-110 m-[2.2px] p-[3px]"
                 onClick={() => {
                   onChange(presetColor);
                   setSelectedColor(presetColor); // Set selected color when preset is clicked
@@ -75,13 +73,13 @@ function SwatchesPicker({ color, onChange, presetColors }) {
                   onChange(customColor);
                   setSelectedColor(customColor); // Set selected color when custom color is clicked
                 }}
-                className="btn btn-sm btn-square border border-primary-content hover:scale-110  m-[2px] mt-2 p-[3px]"
+                className="btn btn-sm btn-square border border-primary-content hover:scale-110 m-[2.2px] p-[3px]"
               >
                 <div style={{ background: customColor }} className="w-full h-full border border-primary-content rounded-full"></div>
               </button>
             ))}
             <button
-              className="btn btn-sm btn-square border border-primary-content hover:scale-110  m-1 mt-2 p-[4px] rounded-md"
+              className="btn btn-sm btn-square border border-primary-content hover:scale-110 m-[2.2px] p-[3px]"
               onClick={handleAddSwatch}
             >
               +
