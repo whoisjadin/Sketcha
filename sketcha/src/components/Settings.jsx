@@ -112,9 +112,9 @@ function Settings({ stageRef, canvasSize, setCanvasSize, setIsSketchLoaded, setF
                 </div>
                 <div className=" flex-cols w-32">
                     <label className="text-xs font-thin tracking-wide">Width:</label>
-                    <input type="number" value={canvasSize.width} className="input input-bordered border-primary-content rounded-md input-sm px-1 w-32" step="10" placeholder="width" onChange={handleWidthChange} />
+                    <input type="number" pattern="[0-9]*" inputMode="decimal" value={canvasSize.width} className="input input-bordered border-primary-content rounded-md input-sm px-1 w-32" step="10" placeholder="width" onChange={handleWidthChange} />
                     <label className="text-xs font-thin tracking-wide">Height:</label>
-                    <input type="number" value={canvasSize.height} className="input input-bordered border-primary-content rounded-md input-sm px-1 w-32" step="10" placeholder="height" onChange={handleHeightChange} />
+                    <input type="number" pattern="[0-9]*" inputMode="decimal" value={canvasSize.height} className="input input-bordered border-primary-content rounded-md input-sm px-1 w-32" step="10" placeholder="height" onChange={handleHeightChange} />
                 </div>
             </div>
             <dialog id="new_sketch_warning" className="modal">

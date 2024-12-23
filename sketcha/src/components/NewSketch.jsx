@@ -37,6 +37,8 @@ function NewSketch({ canvasSize, setCanvasSize, setNewSketch, setIsSketchLoaded,
                 <div className="flex flex-col">
                     <label className="text-xs font-thin tracking-wide">Width:</label>
                     <input
+                        pattern="[0-9]*"
+                        inputMode="decimal"
                         type="number"
                         value={canvasSize.width}
                         className="input input-bordered border-primary-content rounded-md input-sm px-1 w-32"
@@ -46,6 +48,8 @@ function NewSketch({ canvasSize, setCanvasSize, setNewSketch, setIsSketchLoaded,
                     />
                     <label className="text-xs font-thin tracking-wide">Height:</label>
                     <input
+                        pattern="[0-9]*"
+                        inputMode="decimal"
                         type="number"
                         value={canvasSize.height}
                         className="input input-bordered border-primary-content rounded-md input-sm px-1 w-32"
