@@ -7,7 +7,7 @@ function Settings({ stageRef, canvasSize, setCanvasSize, setIsSketchLoaded, setF
     const handleWidthChange = (e) => setCanvasSize({ ...canvasSize, width: parseInt(e.target.value) });
     const handleHeightChange = (e) => setCanvasSize({ ...canvasSize, height: parseInt(e.target.value) });
 
-    const handleSave = () => {
+    const handleSavePng = () => {
         if (!stageRef.current) return;
 
         const width = stageRef.current.width();
@@ -16,6 +16,40 @@ function Settings({ stageRef, canvasSize, setCanvasSize, setIsSketchLoaded, setF
             width,
             height,
             mimeType: 'image/png',
+        });
+
+        const downloadLink = document.createElement('a');
+        downloadLink.href = dataURL;
+        downloadLink.download = fileName;
+        downloadLink.click();
+    };
+
+    const handleSaveJpeg = () => {
+        if (!stageRef.current) return;
+
+        const width = stageRef.current.width();
+        const height = stageRef.current.height();
+        const dataURL = stageRef.current.toDataURL({
+            width,
+            height,
+            mimeType: 'image/jpeg',
+        });
+
+        const downloadLink = document.createElement('a');
+        downloadLink.href = dataURL;
+        downloadLink.download = fileName;
+        downloadLink.click();
+    };
+
+    const handleSaveWebp = () => {
+        if (!stageRef.current) return;
+
+        const width = stageRef.current.width();
+        const height = stageRef.current.height();
+        const dataURL = stageRef.current.toDataURL({
+            width,
+            height,
+            mimeType: 'image/webp',
         });
 
         const downloadLink = document.createElement('a');
@@ -100,16 +134,19 @@ function Settings({ stageRef, canvasSize, setCanvasSize, setIsSketchLoaded, setF
                     <h3 className="font-bold text-lg mb-4">Save Sketch</h3>
                     <div className="flex flex-row space-x-6">
                         <div className="flex flex-col w-full">
-                        <p className="text-sm">Sketch Name:</p>
-                        <input type="text" value={fileName} className="input input-bordered border-primary-content rounded-md input-sm px-1 w-full" placeholder="Sketch name" onChange={(e) => setFileName(e.target.value)} />
-
-                    <button className="mt-4 btn border bg-base-100 rounded-md border-primary-content w-full" onClick={handleSave}>Save as PNG</button>
-                    </div>
-                    <div className="flex-none flex w-40 sm:w-64 h-40 sm:h-64 justify-center items-center border border-primary-content rounded-sm p-2 bg-base-200">
-                        {previewImage && (
-                            <img src={previewImage} alt="Preview" className="bg-base-100 sm:w-52 w-20 sm:h-52 w-20 m-auto shadow-sm" />
-                        )}
-                    </div>
+                            <p className="text-sm">Sketch Name:</p>
+                            <input type="text" value={fileName} className="input input-bordered border-primary-content rounded-md input-sm px-1 w-full" placeholder="Sketch name" onChange={(e) => setFileName(e.target.value)} />
+                            <div>
+                                <button className="mt-4 btn btn-sm border bg-base-100 rounded-md border-primary-content w-full" onClick={handleSavePng}>Save as PNG</button>
+                                <button className="mt-2 btn btn-sm border bg-base-100 rounded-md border-primary-content w-full" onClick={handleSaveJpeg}>Save as JPEG</button>
+                                <button className="mt-2 btn btn-sm border bg-base-100 rounded-md border-primary-content w-full" onClick={handleSaveWebp}>Save as WEBP</button>
+                            </div>
+                        </div>
+                        <div className="flex-none flex w-40 sm:w-64 h-40 sm:h-64 justify-center items-center border border-primary-content rounded-sm p-4 bg-base-200">
+                            {previewImage && (
+                                <img src={previewImage} alt="Preview" className="bg-base-100 max-w-full max-h-full shadow-sm" />
+                            )}
+                        </div>
                     </div>
                     <div className="modal-action flex-col space-x-0 space-y-2">
                         <form method="dialog">

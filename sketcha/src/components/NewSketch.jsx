@@ -75,10 +75,10 @@ function NewSketch({ canvasSize, setCanvasSize, setNewSketch, setIsSketchLoaded,
                         {canvasSize.width} x {canvasSize.height} (pixels)
                     </p>
                     <div
-                        className="bg-base-100 border border-primary-content"
+                        className="bg-base-100 border max-w-full max-h-full border-primary-content"
                         style={{
-                            width: `${(canvasSize.width / (canvasSize.width + canvasSize.height)) * 12}rem`,
-                            height: `${(canvasSize.height / (canvasSize.width + canvasSize.height)) * 12}rem`,
+                            width: `${(canvasSize.width / (canvasSize.width + canvasSize.height)) * 14}rem`,
+                            height: `${(canvasSize.height / (canvasSize.width + canvasSize.height)) * 14}rem`,
                         }}
                     />
                 </div>
