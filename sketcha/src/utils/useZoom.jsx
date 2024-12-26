@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 
 export function useZoom(initialScale = 0.8, zoomStep = 0.1, maxScale = 2, minScale = 0.1) {
   const [scale, setScale] = useState(initialScale);
@@ -13,58 +13,47 @@ export function useZoom(initialScale = 0.8, zoomStep = 0.1, maxScale = 2, minSca
     height: 'auto',
     transform: `scale(${scale})`,
     transformOrigin: 'center center',
-    transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
-    transitionDuration: '500ms',
-    transitionProperty: 'transform',
+    transition: 'transform 500ms cubic-bezier(0.4, 0, 0.2, 1)',
   };
 
-  const handleWheel = (event) => {
+  const updateScale = useCallback((newScale) => {
+    setScale(prevScale => Math.min(Math.max(newScale, minScale), maxScale));
+  }, [minScale, maxScale]);
+
+  const handleWheel = useCallback((event) => {
     event.preventDefault();
     const delta = event.deltaY;
-    let newScale = scale + (delta < 0 ? zoomStep : -zoomStep);
-    newScale = Math.min(Math.max(newScale, minScale), maxScale);
-    setScale(newScale);
-  };
+    updateScale(scale + (delta < 0 ? zoomStep : -zoomStep));
+  }, [scale, zoomStep, updateScale]);
 
-  const handleTouchMove = (event) => {
+  const handleTouchMove = useCallback((event) => {
     if (event.touches.length === 2) {
-      const touch1 = event.touches[0];
-      const touch2 = event.touches[1];
-      const distance = Math.sqrt(Math.pow(touch2.clientX - touch1.clientX, 2) + Math.pow(touch2.clientY - touch1.clientY, 2));
+      const [touch1, touch2] = event.touches;
+      const distance = Math.hypot(touch2.clientX - touch1.clientX, touch2.clientY - touch1.clientY);
       if (touchStartDistance.current === null) {
         touchStartDistance.current = distance;
       } else {
         const scaleChange = distance / touchStartDistance.current;
-        let newScale = scale * scaleChange;
-        newScale = Math.min(Math.max(newScale, minScale), maxScale);
-        setScale(newScale);
+        updateScale(scale * scaleChange);
         touchStartDistance.current = distance;
       }
     }
-  };
+  }, [scale, updateScale]);
 
   useEffect(() => {
-    const handleGestureStart = (event) => {
+    const handleGesture = (event) => {
       event.preventDefault();
-      document.body.style.zoom = 0.99;
-    };
-    const handleGestureChange = (event) => {
-      event.preventDefault();
-      document.body.style.zoom = 0.99;
-    };
-    const handleGestureEnd = (event) => {
-      event.preventDefault();
-      document.body.style.zoom = 1;
+      document.body.style.zoom = event.type === 'gestureend' ? 1 : 0.99;
     };
 
-    document.addEventListener("gesturestart", handleGestureStart);
-    document.addEventListener("gesturechange", handleGestureChange);
-    document.addEventListener("gestureend", handleGestureEnd);
+    document.addEventListener("gesturestart", handleGesture);
+    document.addEventListener("gesturechange", handleGesture);
+    document.addEventListener("gestureend", handleGesture);
 
     return () => {
-      document.removeEventListener("gesturestart", handleGestureStart);
-      document.removeEventListener("gesturechange", handleGestureChange);
-      document.removeEventListener("gestureend", handleGestureEnd);
+      document.removeEventListener("gesturestart", handleGesture);
+      document.removeEventListener("gesturechange", handleGesture);
+      document.removeEventListener("gestureend", handleGesture);
     };
   }, []);
 
@@ -75,7 +64,7 @@ export function useZoom(initialScale = 0.8, zoomStep = 0.1, maxScale = 2, minSca
       document.removeEventListener("wheel", handleWheel);
       document.removeEventListener("touchmove", handleTouchMove);
     };
-  }, [scale]);
+  }, [handleWheel, handleTouchMove]);
 
   return { scale, zoomableRef, zoomStyle };
 }

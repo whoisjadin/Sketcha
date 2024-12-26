@@ -11,13 +11,13 @@ function Canvas({
   setLayers,
   layers,
   activeLayerId,
-  stageRef
+  stageRef,
 }) {
   const validatedLayers = Array.isArray(layers)
     ? layers.map((layer) => ({
-        ...layer,
-        lines: Array.isArray(layer.lines) ? layer.lines : [],
-      }))
+      ...layer,
+      lines: Array.isArray(layer.lines) ? layer.lines : [],
+    }))
     : [];
 
   if (!Array.isArray(layers) || validatedLayers.length === 0) return null;
@@ -30,7 +30,6 @@ function Canvas({
   const [cursorStyle, setCursorStyle] = useState({});
   const [isCursorVisible, setCursorVisible] = useState(false); // State to control cursor visibility
   const [isCanvasHovered, setCanvasHovered] = useState(false); // Track if canvas is hovered
-
   const layerRefs = useRef({});
   const cursorRef = useRef(null);
 
@@ -89,18 +88,18 @@ function Canvas({
         const updatedLayers = validatedLayers.map((layer) =>
           layer.id === activeLayerId
             ? {
-                ...layer,
-                lines: [
-                  ...layer.lines,
-                  {
-                    points: [x, y],
-                    color: "rgba(0,0,0,1)",
-                    size: brushSize,
-                    globalCompositeOperation: "destination-out",
-                    isEraser: true,
-                  },
-                ],
-              }
+              ...layer,
+              lines: [
+                ...layer.lines,
+                {
+                  points: [x, y],
+                  color: "rgba(0,0,0,1)",
+                  size: brushSize,
+                  globalCompositeOperation: "destination-out",
+                  isEraser: true,
+                },
+              ],
+            }
             : layer
         );
         setLayers(updatedLayers);
@@ -109,12 +108,12 @@ function Canvas({
         const updatedLayers = validatedLayers.map((layer) =>
           layer.id === activeLayerId
             ? {
-                ...layer,
-                lines: [
-                  ...layer.lines,
-                  { points: [x, y], color: drawingColor, size: brushSize },
-                ],
-              }
+              ...layer,
+              lines: [
+                ...layer.lines,
+                { points: [x, y], color: drawingColor, size: brushSize },
+              ],
+            }
             : layer
         );
         setLayers(updatedLayers);
@@ -166,7 +165,7 @@ function Canvas({
             key={layer.id}
             ref={(node) => (layerRefs.current[layer.id] = node)}
             opacity={layer.opacity}
-            blendMode={layer.blendMode}
+            globalCompositeOperation={layer.globalCompositeOperation}
           >
             {layer.lines.map((line, index) => (
               <Line
@@ -193,7 +192,7 @@ function Canvas({
       if (activeLayer) {
         activeLayerRef.setAttrs({
           opacity: activeLayer.opacity,
-          blendMode: activeLayer.blendMode,
+          globalCompositeOperation: activeLayer.globalCompositeOperation,
         });
         activeLayerRef.getLayer().batchDraw();
       }
@@ -203,21 +202,23 @@ function Canvas({
   return (
     <div className="relative">
       {/* The cursor div is now conditionally visible based on the state */}
-      <div
-        className="custom-cursor"
-        style={{
-          ...cursorStyle,
-          visibility: isCursorVisible ? "visible" : "hidden",
-          position: "absolute",
-          pointerEvents: "none", // Prevent the custom cursor from blocking interaction
-          zIndex: 10, // Ensure it's above the canvas
-        }}
-        ref={cursorRef}
-      ></div>
+      {(selectedTool === "pencil" || selectedTool === "eraser") && (
+        <div
+          className="custom-cursor"
+          style={{
+            ...cursorStyle,
+            visibility: isCursorVisible ? "visible" : "hidden",
+            position: "absolute",
+            pointerEvents: "none", // Prevent the custom cursor from blocking interaction
+            zIndex: 10, // Ensure it's above the canvas
+          }}
+          ref={cursorRef}
+        ></div>
+      )}
       <div
         className="bg-base-100 border border-primary-content shadow-md"
         style={{
-          cursor: isCanvasHovered ? "none" : "default", // Hide default pointer when canvas is hovered
+          cursor: isCanvasHovered && isCursorVisible ? "none" : "default",
         }}
       >
         <Stage

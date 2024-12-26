@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useLayers } from '../utils/useLayers';
 
 const Layers = ({ layers,
@@ -23,7 +23,7 @@ const Layers = ({ layers,
             lines: [],
             drawingLines: [],
             opacity: 1,
-            blendMode: "normal",
+            globalCompositeOperation: "source-over", // default value
         };
         setLayers([...layers, newLayer]);
         setActiveLayerId(newLayer.id); // Automatically set the newly added layer as the active one
@@ -43,10 +43,10 @@ const Layers = ({ layers,
 
     const handleLayerPropertyChange = (property, value) => {
         const updatedLayers = layers.map((layer) =>
-            layer.id === activeLayerId ? { ...layer, [property]: value } : layer
+          layer.id === activeLayerId ? { ...layer, [property]: value } : layer
         );
         setLayers(updatedLayers);
-    };
+      };
 
     const handleDoubleClick = (layer) => {
         setEditingLayer(layer.id);
@@ -62,6 +62,39 @@ const Layers = ({ layers,
         }
         setEditingLayer(null);
     };
+
+    useEffect(() => {
+        const handleAddLayerShortcut = (event) => {
+            if ((event.ctrlKey || event.metaKey) && event.key === 'n') {
+                event.preventDefault();
+                addLayer();
+            }
+        };
+
+        const handleRenameLayerShortcut = (event) => {
+            if ((event.ctrlKey || event.metaKey) && event.key === 'r') {
+                event.preventDefault();
+                handleDoubleClick(activeLayer);
+            }
+        };
+
+        const handleToggleVisibilityShotcut = (event) => {
+            if ((event.ctrlKey || event.metaKey) && event.key === 'v') {
+                event.preventDefault();
+                handleToggleLayerVisibility(activeLayer.id);
+            }
+        };
+
+        document.addEventListener('keydown', handleAddLayerShortcut);
+        document.addEventListener('keydown', handleRenameLayerShortcut);
+        document.addEventListener('keydown', handleToggleVisibilityShotcut);
+
+        return () => {
+            document.removeEventListener('keydown', handleAddLayerShortcut);
+            document.removeEventListener('keydown', handleRenameLayerShortcut);
+            document.removeEventListener('keydown', handleToggleVisibilityShotcut);
+        };
+    }, [addLayer, activeLayer, handleDoubleClick]);
 
     return (
         <div className="space-y-2 p-1 w-fit flex flex-col">
@@ -92,12 +125,12 @@ const Layers = ({ layers,
                     <div className="flex flex-col">
                         <label className="text-xs pb-1">Blend Mode</label>
                         <select
-                            value={activeLayer.blendMode}
-                            onChange={(e) => handleLayerPropertyChange("blendMode", e.target.value)}
+                            value={activeLayer.globalCompositeOperation}
+                            onChange={(e) => handleLayerPropertyChange("globalCompositeOperation", e.target.value)}
                             className="select select-sm w-28 border border-primary-content"
-                            disabled
+                            disabled                            
                         >
-                            <option value="normal">Normal</option>
+                            <option value="source-over">Normal</option>
                             <option value="multiply">Multiply</option>
                             <option value="screen">Screen</option>
                             <option value="overlay">Overlay</option>
@@ -162,6 +195,11 @@ const Layers = ({ layers,
                                         type="text"
                                         value={newName}
                                         onChange={(e) => setNewName(e.target.value)}
+                                        onKeyDown={(e) => {
+                                            if (e.key === "Enter") {
+                                              handleBlur(layer);
+                                            }
+                                          }}
                                         onBlur={() => handleBlur(layer)}
                                         autoFocus
                                     />
