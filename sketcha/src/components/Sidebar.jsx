@@ -13,8 +13,8 @@ function Sidebar({ drawingColor, setDrawingColor, brushSize, setBrushSize }) {
                     <summary className="hover:bg-base-200 text-xs font-bold tracking-wide hover:cursor-pointer p-2">Brush Size</summary>
                     <div className="p-2">
                         <div className="flex items-center space-x-1">
-                            <input className="input input-bordered border-primary-content rounded-md input-xs px-1 w-12 max-w-xs" type="number" min="1" max="500" value={brushSize} onChange={(e) => setBrushSize(parseInt(e.target.value))} />
-                            <input className="w-full range range-xs" type="range" min="1" max="500" value={brushSize} onChange={(e) => setBrushSize(parseInt(e.target.value))} />
+                            <input className="input input-bordered border-primary-content rounded-md input-xs px-1 w-12 max-w-xs" name="Brush Size Input" id="brushSizeInput" type="number" min="1" max="500" value={brushSize} onChange={(e) => setBrushSize(parseInt(e.target.value))} />
+                            <input className="w-full range range-xs" type="range" min="1" max="500" value={brushSize} id="brushSizeSlider" name="Brush Size Slider" onChange={(e) => setBrushSize(parseInt(e.target.value))} />
                         </div>
                         <p className="text-xs font-light tracking-wide mt-2">Preset Brush Sizes</p>
                         <div className="w-[11.4rem] flex flex-wrap">
