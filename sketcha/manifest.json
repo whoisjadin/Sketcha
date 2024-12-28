@@ -1,0 +1,15 @@
+{
+    "name": "Sketcha",
+    "short_name": "Sketcha",
+    "icons": [
+        {
+            "src": "/src/assets/mobile_icon.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#E4E9F3",
+    "theme_color": "#E4E9F3"
+}
